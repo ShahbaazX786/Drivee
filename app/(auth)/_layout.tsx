@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Stack } from "expo-router";
 
-const Layout = () => {
+const AuthLayout = () => {
   return (
     <Stack>
       <Stack.Screen name="welcome" options={{ headerShown: false }} />
@@ -11,4 +11,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default AuthLayout;
