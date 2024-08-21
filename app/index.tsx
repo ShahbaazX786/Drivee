@@ -1,13 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Redirect } from "expo-router";
 
-const Home = () => {
-  return (
-    <SafeAreaView>
-      <Text>Home</Text>
-    </SafeAreaView>
-  );
+const MainPage = () => {
+  // just redirect to welcome page in auth layout
+  return <Redirect href="/(auth)/welcome" />;
 };
 
-export default Home;
+export default MainPage;
