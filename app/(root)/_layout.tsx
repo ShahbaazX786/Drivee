@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Stack } from "expo-router";
 
-const RootLayout = () => {
+const HomeLayout = () => {
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -9,4 +9,4 @@ const RootLayout = () => {
   );
 };
 
-export default RootLayout;
+export default HomeLayout;
