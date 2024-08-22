@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import CustomButton from "@/components/customButton";
 import InputField from "@/components/inputField";
+import OAuth from "@/components/oAuth";
 import { icons, images } from "@/constants";
 import { Link } from "expo-router";
 import { useState } from "react";
@@ -53,8 +54,13 @@ const SignUp = () => {
               setForm({ ...form, password: value });
             }}
           />
-          <CustomButton title="Sign Up" onPress={signUpUser} className="mt-6" />
+          <CustomButton
+            title="Sign Up"
+            onPress={signUpUser}
+            className={"mt-6"}
+          />
 
+          <OAuth />
           <Link
             href={"/sign-in"}
             className="text-lg text-center text-general-200 mt-10"
