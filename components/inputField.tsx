@@ -1,0 +1,52 @@
+/* eslint-disable prettier/prettier */
+import { InputFieldProps } from "@/types/type";
+import {
+  Image,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  Text,
+  TextInput,
+  View,
+  TouchableWithoutFeedback,
+} from "react-native";
+
+const InputField = ({
+  label,
+  labelStyle,
+  icon,
+  secureTextEntry = false,
+  containerStyle,
+  inputStyle,
+  iconStyle,
+  className,
+  ...props
+}: InputFieldProps) => {
+  return (
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "android" ? "padding" : "height"}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View className="my-2 w-full">
+          <Text className={`text-lg font-JakartaSemiBold mb-3 ${labelStyle}`}>
+            {label}
+          </Text>
+          <View
+            className={`flex flex-row justify-start items-center relative bg-neutral-100 rounded-full border border-neutral-100 focus:border-neutral-500 ${containerStyle}`}
+          >
+            {icon && (
+              <Image source={icon} className={`w-6 h-6 ml-4 ${iconStyle}`} />
+            )}
+            <TextInput
+              className={`rounded-full p-4 font-JakartaSemiBold flex-1 text-[16px] ${inputStyle} text-left`}
+              secureTextEntry={secureTextEntry}
+              {...props}
+            ></TextInput>
+          </View>
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
+  );
+};
+
+export default InputField;
