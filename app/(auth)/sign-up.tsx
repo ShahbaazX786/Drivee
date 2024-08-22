@@ -23,6 +23,9 @@ const SignUp = () => {
     code: "",
   });
 
+  const [showSuccessModal, setShowSuccessModal] = useState(false); // adding this extra state variable as success modal was not appearing ios(as they say that 2 modals can't be supported by rn at a time )
+
+  // user signup method.
   const signUpUser = async () => {
     if (!isLoaded) {
       return;
@@ -45,6 +48,7 @@ const SignUp = () => {
     }
   };
 
+  //user verification method.
   const verifyUser = async () => {
     if (!isLoaded) {
       return;
@@ -134,9 +138,11 @@ const SignUp = () => {
         {/* Code Verification Modal */}
         <ReactNativeModal
           isVisible={verification.state === "pending"}
-          onModalHide={() =>
-            setVerification({ ...verification, state: "success" })
-          }
+          onModalHide={() => {
+            if (verification.state === "success") {
+              setShowSuccessModal(true);
+            }
+          }}
         >
           <View className="bg-white rounded-2xl px-7 py-9 min-h-[300px]">
             {/* <Image source={images.check} className="w-28 h-28 mx-auto  my-5" /> */}
@@ -170,7 +176,7 @@ const SignUp = () => {
         </ReactNativeModal>
 
         {/* Code verification success modal */}
-        <ReactNativeModal isVisible={verification.state === "success"}>
+        <ReactNativeModal isVisible={showSuccessModal}>
           <View className="bg-white rounded-2xl px-7 py-9 min-h-[300px]">
             <Image source={images.check} className="w-28 h-28 mx-auto  my-5" />
             <Text className="text-3xl font-JakartaBold text-center">
@@ -181,7 +187,10 @@ const SignUp = () => {
             </Text>
             <CustomButton
               title="Continue"
-              onPress={() => router.replace("/(root)/(tabs)/home")}
+              onPress={() => {
+                setShowSuccessModal(false);
+                router.replace("/(root)/(tabs)/home");
+              }}
               className="mt-5"
             />
           </View>
