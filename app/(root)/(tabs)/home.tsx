@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
+import Map from "@/components/map";
 import RideCard from "@/components/rideCard";
+import SearchInput from "@/components/searchInput";
 import { icons, images } from "@/constants";
 import { useUser } from "@clerk/clerk-expo";
 import {
@@ -124,6 +126,7 @@ export default function Page() {
   const { user } = useUser();
 
   const logOut = async () => {};
+  const handleDestination = async () => {};
 
   return (
     <SafeAreaView className="bg-general-500">
@@ -151,20 +154,38 @@ export default function Page() {
           </View>
         )}
         ListHeaderComponent={() => (
-          <View className="flex flex-row items-center justify-between my-5">
-            <Text className="text-lg font-JakartaExtraBold capitalize">
-              Welcome,{" "}
-              {user?.firstName ||
-                user?.emailAddresses[0].emailAddress.split("@")[0]}
-              👋
-            </Text>
-            <TouchableOpacity
-              className="w-8 h-8 items-center justify-between rounded-full bg-white p-2"
-              onPress={logOut}
-            >
-              <Image className="w-4 h-4" source={icons.out} />
-            </TouchableOpacity>
-          </View>
+          <>
+            <View className="flex flex-row items-center justify-between my-5">
+              <Text className="text-lg font-JakartaExtraBold capitalize">
+                Welcome,{" "}
+                {user?.firstName ||
+                  user?.emailAddresses[0].emailAddress.split("@")[0]}
+                👋
+              </Text>
+              <TouchableOpacity
+                className="w-8 h-8 items-center justify-between rounded-full bg-white p-2"
+                onPress={logOut}
+              >
+                <Image className="w-4 h-4" source={icons.out} />
+              </TouchableOpacity>
+            </View>
+            <SearchInput
+              icon={icons.search}
+              containerStyle="bg-white shadow-md shadow-neutral-300"
+              handlePress={handleDestination}
+            />
+            <>
+              <Text className="text-xl font-JakartaBold mt-5 mb-3 ">
+                Your current Location
+              </Text>
+              <View className="flex flex-row items-center bg-transparent h-[300px]">
+                <Map />
+              </View>
+              <Text className="text-xl font-JakartaBold mt-5 mb-3 ">
+                Recent Rides
+              </Text>
+            </>
+          </>
         )}
       ></FlatList>
     </SafeAreaView>
