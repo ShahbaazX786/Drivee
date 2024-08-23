@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 import RideCard from "@/components/rideCard";
+import { images } from "@/constants";
 import { useUser } from "@clerk/clerk-expo";
-import { FlatList, Text } from "react-native";
+import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const recentRides = [
@@ -112,6 +113,7 @@ const recentRides = [
 ];
 
 export default function Page() {
+  const loading = false;
   const { user } = useUser();
 
   return (
@@ -119,6 +121,26 @@ export default function Page() {
       <FlatList
         data={recentRides?.slice(0, 5)}
         renderItem={({ item }) => <RideCard ride={item} />}
+        className="px-5"
+        keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{ paddingBottom: 100 }}
+        ListEmptyComponent={() => (
+          <View className="flex flex-col items-center justify-center">
+            {!loading ? (
+              <>
+                <Image
+                  source={images.noResult}
+                  className="w-40 h-40"
+                  alt="No Recent Rides Found"
+                  resizeMode="contain"
+                />
+                <Text className="text-sm">No Recent Rides Found!</Text>
+              </>
+            ) : (
+              <ActivityIndicator size={"large"} color={"#000"} />
+            )}
+          </View>
+        )}
       >
         <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
       </FlatList>
