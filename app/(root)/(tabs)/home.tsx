@@ -1,8 +1,15 @@
 /* eslint-disable prettier/prettier */
 import RideCard from "@/components/rideCard";
-import { images } from "@/constants";
+import { icons, images } from "@/constants";
 import { useUser } from "@clerk/clerk-expo";
-import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const recentRides = [
@@ -116,6 +123,8 @@ export default function Page() {
   const loading = false;
   const { user } = useUser();
 
+  const logOut = async () => {};
+
   return (
     <SafeAreaView className="bg-general-500">
       <FlatList
@@ -141,9 +150,23 @@ export default function Page() {
             )}
           </View>
         )}
-      >
-        <Text>Hello {user?.emailAddresses[0].emailAddress}</Text>
-      </FlatList>
+        ListHeaderComponent={() => (
+          <View className="flex flex-row items-center justify-between my-5">
+            <Text className="text-lg font-JakartaExtraBold capitalize">
+              Welcome,{" "}
+              {user?.firstName ||
+                user?.emailAddresses[0].emailAddress.split("@")[0]}
+              👋
+            </Text>
+            <TouchableOpacity
+              className="w-8 h-8 items-center justify-between rounded-full bg-white p-2"
+              onPress={logOut}
+            >
+              <Image className="w-4 h-4" source={icons.out} />
+            </TouchableOpacity>
+          </View>
+        )}
+      ></FlatList>
     </SafeAreaView>
   );
 }
