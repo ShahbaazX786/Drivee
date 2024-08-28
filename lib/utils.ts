@@ -1,3 +1,4 @@
+import { monthNames } from "@/constants/constants";
 import { Ride } from "@/types/type";
 
 export const sortRides = (rides: Ride[]): Ride[] => {
@@ -25,20 +26,7 @@ export function formatTime(minutes: number): string {
 export function formatDate(dateString: string): string {
   const date = new Date(dateString);
   const day = date.getDate();
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+
   const month = monthNames[date.getMonth()];
   const year = date.getFullYear();
 

@@ -1,4 +1,4 @@
-export const mock_drivers = [
+const mock_drivers = [
   {
     id: "1",
     first_name: "James",
@@ -43,4 +43,21 @@ export const mock_drivers = [
     car_seats: 4,
     rating: "4.90",
   },
+];
+
+const monthNames = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ] as const;
+
+export { monthNames, mock_drivers };
