@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 
 import { icons } from "@/constants";
-import { mock_drivers } from "@/constants/constants";
+import { mock_drivers as drivers } from "@/constants/constants";
 import { calculateRegion, generateMarkersFromData } from "@/lib/map";
 import { useDriverStore, useLocationStore } from "@/store";
 import { MarkerData } from "@/types/type";
@@ -24,7 +24,6 @@ const Map = () => {
   });
 
   useEffect(() => {
-    const drivers = mock_drivers;
     if (Array.isArray(drivers)) {
       if (!userLatitude || !userLongitude) return;
       const newMarkers = generateMarkersFromData({
